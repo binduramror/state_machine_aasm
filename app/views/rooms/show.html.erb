@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Person name:</strong>
+  <%= @room.person_name %>
+</p>
+
+<p>
+  <strong>Person address:</strong>
+  <%= @room.person_address %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @room.person_id %>
+</p>
+
+<p>
+  <strong>No of romms:</strong>
+  <%= @room.no_of_romms %>
+</p>
+
+<p>
+  <strong>Amount per room:</strong>
+  <%= @room.amount_per_room %>
+</p>
+
+<p>
+  <strong>Current State:</strong>
+  <p id="state"> <%= @room.aasm_state %> </p>
+</p>
+
+<%= link_to 'Edit', edit_room_path(@room) %> |
+<%= link_to 'Back', rooms_path %>
+<p id="test_p"> change status </p>
+<script>
+$(document).ready(function() {
+  
+    $("#test_p").click(function(){
+      var room_id = "<%= @room.id %>";
+      alert('You clicked the Hide link');
+      $.ajax({
+        type:"GET",
+        url: "/rooms/change_state",
+        dataType:"json",
+        data: {room_id: room_id},
+        success:function(result){
+          $("#state").text(result.aasm_state);
+        },
+        error:function(jqXHR,exception){
+          alert("there is an error in changing state");
+        }
+      })
+    });
+  });
+  </script>

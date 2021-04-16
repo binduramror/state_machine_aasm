@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  person_name: MyString
+  person_address: MyText
+  person_id: 1
+  no_of_romms: 1
+  amount_per_room: 
+
+two:
+  person_name: MyString
+  person_address: MyText
+  person_id: 1
+  no_of_romms: 1
+  amount_per_room: 
