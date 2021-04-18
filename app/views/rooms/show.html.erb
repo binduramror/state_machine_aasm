@@ -40,7 +40,7 @@ $(document).ready(function() {
       var room_id = "<%= @room.id %>";
       alert('You clicked the Hide link');
       $.ajax({
-        type:"GET",
+        type:"POST",
         url: "/rooms/change_state",
         dataType:"json",
         data: {room_id: room_id},

@@ -45,4 +45,9 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to rooms_url
   end
+
+  test "should change room state" do
+    post rooms_url+'/change_state', params: { room_id: @room.id }
+    assert_response :success
+  end
 end

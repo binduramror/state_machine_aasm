@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :rooms do
-    get "change_state", on: :collection
+    post "change_state", on: :collection
   end
   resources :documentations
   root to: redirect('/documentations')
