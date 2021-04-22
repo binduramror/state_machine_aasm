@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token, :only=> [:change_state]
 
   # GET /rooms or /rooms.json
   def index
@@ -74,6 +75,6 @@ class RoomsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def room_params
-      params.require(:room).permit(:person_name, :person_address, :person_id, :no_of_romms, :amount_per_room)
+      params.require(:room).permit(:name, :room_no, :room_type, :facilities, :price)
     end
 end

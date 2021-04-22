@@ -3,7 +3,8 @@ require 'aasm'
 class Room < ApplicationRecord
     include AASM
 
-    validates :person_name, presence: true
+    validates :name, presence: true
+    validates :room_no, presence: true, uniqueness: true
        
     aasm do
         state :draft, initial: true, after: :notify_draft

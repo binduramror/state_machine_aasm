@@ -2,8 +2,8 @@
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
  *
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
@@ -13,4 +13,103 @@
  *= require_tree .
  *= require_self
  */
+ .quick-access { float:left; width: 87%; margin-top:1%; }
+ .quick-access p a { color:#2c487c; text-decoration:none; }
+ .quick-access { width:auto; background:#034680; padding:12px 30px; min-width:25%; float:right; border-radius: 0px; border:0px;position: relative;top: -12px; } 
+ h1{
+     color: #00cccc;
+ }
+input, select {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
+textarea, select {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 30%;
+  background-color: #00cccc;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #00cccc;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+table {
+  font-family: 'Arial';
+  width: 80%;
+  margin: 25px auto;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+  border-bottom: 2px solid #00cccc;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.10),
+     0px 10px 20px rgba(0,0,0,0.05),
+     0px 20px 20px rgba(0,0,0,0.05),
+     0px 30px 20px rgba(0,0,0,0.05);
+}
+tr:hover {
+    background: #f4f4f4;
+}
+
+  th, td {
+    color: #999;
+    border: 1px solid #eee;
+    padding: 12px 35px;
+    border-collapse: collapse;
+  }
+  th {
+    background: #00cccc;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 18px;
+  }
+
+  #checkin_checkindate_1i, #checkin_checkindate_2i, #checkin_checkindate_3i{
+    pointer-events:none;background: #f2f2f2;
+  }
+
+  .welcome{
+    background-image: url("hotel.jpg");
+    background-color: #cccccc;
+    height: 1000px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+  }
+
+  .buttons {
+    color: blue;
+    font-size: x-large;
+    padding: 30px;
+    border: none;
+    align-items: center;
+  }
+
+  .button-div {
+    align-items: center;
+    margin-left: 600px;
+  }
