@@ -57,4 +57,8 @@ class Room < ApplicationRecord
     def send_confirmation
       puts "send mail confirmation ................."
     end
+
+    def notify
+      puts "send notification ....."
+    end
 end

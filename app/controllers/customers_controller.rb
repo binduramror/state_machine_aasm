@@ -25,7 +25,7 @@ class CustomersController < ApplicationController
     params = customer_params
     @customer = Customer.new(params)
     room = Room.find(params[:room_id])
-    room.reserve!
+    room.ava_res
 
     respond_to do |format|
       if @customer.save && room.save!
