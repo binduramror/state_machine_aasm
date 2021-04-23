@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :rooms do
     post "change_state", on: :collection
   end
+  
   get "/available_rooms" => "rooms#available_rooms"
 
   root to: redirect('/rooms')

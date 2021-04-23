@@ -9,7 +9,7 @@ class CreateCustomers < ActiveRecord::Migration[5.0]
       t.integer :contact_no
       t.text :address
       t.integer :no_of_persons
-      t.references :room, foreign_key: true
+      t.references :room, foreign_key: true, on_delete: :cascade
 
       t.timestamps
     end

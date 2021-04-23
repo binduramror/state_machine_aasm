@@ -3,21 +3,20 @@ require 'aasm'
 class Room < ApplicationRecord
     include AASM
 
+    has_many :customers
     validates :name, presence: true
     validates :room_no, presence: true, uniqueness: true
        
     aasm do
-        state :draft, initial: true, after: :notify_draft
+        state :available, initial: true, after: :notify_draft
         state :pre_reserved
-        state :booked, after: :notify_reservation
+        state :booked
         state :fulfilled 
-        state :available   
-        event :pre_reserve! do
-          transitions from: :draft, to: :pre_reserved
-            transitions from: :pre_reserved, to: :booked, after: :process_book
-            transitions from: :booked, to: :fulfilled
-            transitions from: :fulfilled, to: :available
-          end
+        event :reserve! do
+          transitions from: :available, to: :pre_reserved
+          transitions from: :pre_reserved, to: :booked
+          transitions from: :booked, to: :fulfilled
+        end
         
     end
 

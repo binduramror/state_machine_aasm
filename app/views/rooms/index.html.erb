@@ -27,14 +27,39 @@
         <td><%= room.name %></td>
         <td><%= room.room_type %></td>
         <td><%= room.facilities %></td>
-        <td><%= room.aasm_state %>
+        <td><%= room.aasm_state.camelize %>
         <td><%= "$#{room.price}" %></td>
         <td><%= link_to '<button type="button" class="btn btn-default">Update</button>'.html_safe, edit_room_path(room) %></td>
         <td><%= link_to '<button type="button" class="btn btn-default">Destroy</button>'.html_safe, room, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <td><%= link_to '<button type="button" class="btn btn-default">Book this Room</button>'.html_safe, new_customer_path( room_id: room.id ) %>
+          <%= hidden_field_tag "room_id", room.id, id: "roomId" %>
+        <% if room.aasm_state.eql?('available')%>
+          <td><%= link_to '<button type="button" class="btn btn-default">Book this Room</button>'.html_safe, new_customer_path( room_id: room.id ) %>
+        <% else %>
+          <td><%= link_to '<button type="button" class="btn btn-default">Change Booking Status</button>'.html_safe, "#", id: room.id, class: "changeStatus" %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+
+<script>
+    $(".changeStatus").click(function(){
+      room_id = parseInt(this.id);
+      $.ajax({
+        type:"POST",
+        url: "/rooms/change_state",
+        dataType:"json",
+        data: {room_id: room_id},
+        success:function(result){
+          $("#state").text(result.aasm_state);
+          $("#notice").append("Room status changed successfully")
+        },
+        error:function(jqXHR,exception){
+          $("#notice").text("There was an error in changing state");
+        }
+      })
+      window.reload();
+    });
+</script>

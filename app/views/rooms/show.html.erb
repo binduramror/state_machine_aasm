@@ -23,8 +23,8 @@
   </tr>
 
   <tr>
-    <td>Facilities</td>
-    <td><%= @room.facilities %></td>
+    <td>Status</td>
+    <td><b><%= @room.aasm_state.camelize %></b></td>
   </tr>
 
   <tr>

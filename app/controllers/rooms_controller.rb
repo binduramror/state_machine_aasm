@@ -60,9 +60,8 @@ class RoomsController < ApplicationController
   end
 
   def change_state
-    puts "current state....."
     room = Room.find(params[:room_id])
-    room.pre_reserve!
+    room.reserve!
     room.save!
     render json: room.to_json 
   end
