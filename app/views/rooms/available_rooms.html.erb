@@ -1,0 +1,32 @@
+
+<h1>List of available rooms</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Room no</th>
+      <th>Name</th>
+      <th>Room Type</th>
+      <th>Facilities</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% if @available_rooms.present? %>
+    <% @available_rooms.each do |room| %>
+      <tr>
+        <td><%= room.room_no %></td>
+        <td><%= room.name %></td>
+        <td><%= room.room_type %></td>
+        <td><%= room.facilities %></td>
+        <td><%= room.aasm_state %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, rooms_path %>
+
+<br>
