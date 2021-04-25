@@ -3,9 +3,10 @@ require 'aasm'
 class Room < ApplicationRecord
     include AASM
 
+    has_many :customers, dependent: :destroy
     validates :name, presence: true
     validates :room_no, presence: true, uniqueness: true
-       
+
     aasm do
       state :available, initial: true, after: :notify
       state :reserved, before_enter: :confirm_details
@@ -50,15 +51,15 @@ class Room < ApplicationRecord
       after_all_transitions :notify
   end
 
+  def confirm_details
+    puts "confirm details from from customer..........."
+  end
+  
+  def send_confirmation
+    puts "send mail confirmation ................."
+  end
 
-    def confirm_details
-      puts "confirm details from from customer..........."
-    end
-    def send_confirmation
-      puts "send mail confirmation ................."
-    end
-
-    def notify
-      puts "send notification ....."
-    end
+  def notify
+    puts "send notification ....."
+  end
 end

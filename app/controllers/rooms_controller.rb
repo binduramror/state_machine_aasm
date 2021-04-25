@@ -24,10 +24,8 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     #BookingService.new(@room)
-    email = "yn.emids.com"
-    ConfirmationMailer.confirmation_details.deliver_later
-
-
+    ConfirmationMailer.confirmation_details.deliver
+    
     respond_to do |format|
       if @room.save
         format.html { redirect_to @room, notice: "Room was successfully created." }

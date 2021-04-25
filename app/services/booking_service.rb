@@ -4,7 +4,6 @@ class BookingService
   
   def initialize(room)
     @room = room
-    binding.pry
     aasm.current_state = room.status.to_sym
   end
 
