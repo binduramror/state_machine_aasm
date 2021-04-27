@@ -25,12 +25,9 @@ class CustomersController < ApplicationController
     params = customer_params
     @customer = Customer.new(params)
     room = Room.find(params[:room_id])
-    
     room.ava_book
-    
     respond_to do |format|
       if @customer.save && room.save!
-        ConfirmationMailer.confirmation_details(@customer).deliver
         format.html { redirect_to @customer, notice: "Customer was successfully created." }
         format.json { render :show, status: :created, location: @customer }
       else

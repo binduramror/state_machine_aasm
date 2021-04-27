@@ -9,7 +9,7 @@ class Room < ApplicationRecord
 
     aasm do
       state :available, initial: true
-      state :booked
+      state :booked, before_enter: :get_status
       state :checkout
 
       event :ava_che do
@@ -25,7 +25,7 @@ class Room < ApplicationRecord
       event :ava_book_rev do
         transitions from: :booked, to: :available
       end
-      
+
       event :book_che do
         transitions from: :booked, to: :checkout
       end
@@ -40,7 +40,7 @@ class Room < ApplicationRecord
         transitions from: :available, to: :booked      
       end
    
-      after_all_transitions :notify
+      after_all_transitions :notify_about_status
   end
 
   def check_status
@@ -51,7 +51,12 @@ class Room < ApplicationRecord
     end
   end
 
-  def notify
-    puts "send notification ....."
+  def get_status
+    self.aasm_state
+  end
+
+  def notify_about_status
+    puts "from after all transactions....."
+    self.aasm_state
   end
 end
