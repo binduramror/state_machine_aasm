@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Customers</h1>
+<%= link_to 'Rooms List', rooms_path %>
+
 
 <table>
   <thead>
@@ -30,7 +32,8 @@
         <td><%= link_to 'Show', customer %></td>
         <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
         <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <td><%= link_to '<button type="button" class="btn btn-default">Checkout Room</button>'.html_safe, "#" %>
+        </tr>
     <% end %>
     <% end %>
   </tbody>
@@ -39,3 +42,12 @@
 <br>
 
 <%= link_to 'New Customer', new_customer_path %>
+
+
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("p").slideToggle();
+  });
+});
+</script>

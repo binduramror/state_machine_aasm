@@ -5,6 +5,15 @@
   </head>
   <body>
     <p>Welcome mail!</p>
+    <p> Room no: <%= @customer.room.room_no %> has been reserved for you
+
+    please check the below details...
+
+    details:-
+    ---------
+    Room No: <%= @customer.room.room_no %>
+    Room Type: <%= @customer.room.room_type %>
+    Facilities: <%= @customer.room.facilities %>
     
   </body>
 </html>

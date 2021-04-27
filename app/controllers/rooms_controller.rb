@@ -24,7 +24,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     #BookingService.new(@room)
-    ConfirmationMailer.confirmation_details.deliver
+    #ConfirmationMailer.confirmation_details.deliver
     
     respond_to do |format|
       if @room.save
@@ -60,10 +60,8 @@ class RoomsController < ApplicationController
   end
 
   def change_state
-    puts "current state....."
     room = Room.find(params[:room_id])
-    room.pre_reserve!
-    room.save!
+    room.res_book!
     render json: room.to_json 
   end
 
