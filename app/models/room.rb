@@ -5,7 +5,7 @@ class Room < ApplicationRecord
 
     has_many :customers, dependent: :destroy
     validates :name, presence: true
-    validates :room_no, presence: true, uniqueness: true
+    validates :room_no, presence: true
 
     aasm do
       state :available, initial: true
@@ -13,10 +13,10 @@ class Room < ApplicationRecord
       state :checkout
 
       event :ava_che do
-        transitions from: :checkout, to: :available
+        transitions from: :available, to: :checkout
       end
       event :ava_che_rev do
-        transitions from: :available, to: :checkout
+        transitions from: :checkout, to: :available
       end
 
       event :ava_book, after: :check_status do
@@ -26,7 +26,7 @@ class Room < ApplicationRecord
         transitions from: :booked, to: :available
       end
 
-      event :book_che do
+      event :book_che, after: :change_status_to_ava do
         transitions from: :booked, to: :checkout
       end
       event :book_che_rev do
@@ -53,6 +53,10 @@ class Room < ApplicationRecord
 
   def get_status
     self.aasm_state
+  end
+
+  def change_status_to_ava
+    self.ava_che_rev!
   end
 
   def notify_about_status
