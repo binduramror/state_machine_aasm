@@ -58,5 +58,5 @@ class Room < ApplicationRecord
   def notify_about_status
     puts "from after all transactions....."
     self.aasm_state
-  end
+  end  
 end

@@ -32,7 +32,10 @@
         <td><%= link_to 'Show', customer %></td>
         <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
         <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to '<button type="button" class="btn btn-default" id=customer.room.id>Checkout Room</button>'.html_safe, "#", id: customer.room.id, class: 'checkout' %>
+        
+        <% if customer.room.aasm_state.eql?('booked')%>
+        <td><%= link_to '<button type="button" class="btn btn-default" >Checkout Room</button>'.html_safe, "#", id: customer.id, class: 'checkout' %>
+        <% end %>
         </tr>
     <% end %>
     <% end %>
@@ -47,7 +50,23 @@
 <script>
 $(document).ready(function(){
   $(".checkout").click(function(){
-    debugger;
+    
+    customer_id = parseInt($(".checkout").attr('id'));
+     $.ajax({
+	        type:"POST",
+	        url: "/rooms/change_state",
+	        dataType:"json",
+	        data: {customer_id: customer_id},
+	        success:function(result){
+            $(".checkout").hide();
+	          $("#state").text(result.aasm_state);
+	          $("#notice").append("Room status changed successfully")
+	        },
+	        error:function(jqXHR,exception){
+            $(".checkout").show();
+            $("#notice").text("There was an error in changing state");
+	        }
+	      })
     $("p").slideToggle();
   });
 });

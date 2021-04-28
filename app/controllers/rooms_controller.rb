@@ -60,8 +60,14 @@ class RoomsController < ApplicationController
   end
 
   def change_state
-    room = Room.find(params[:room_id])
-    room.res_book!
+    customer = Customer.find(params[:customer_id])
+    room = customer.room
+    if room.aasm_state == "available"
+      room.ava_book!
+    elsif room.aasm_state == "booked"
+      room.book_che!
+      ConfirmationMailer.checkout_details(customer).deliver
+    end
     render json: room.to_json 
   end
 
