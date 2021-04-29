@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Customers</h1>
-<%= link_to 'Rooms List', rooms_path %>
+<%= link_to '<button type="button" class="btn btn-default">List of Available Rooms</button>'.html_safe, rooms_path %>
 
 
 <table>
@@ -50,20 +50,19 @@
 <script>
 $(document).ready(function(){
   $(".checkout").click(function(){
-    
     customer_id = parseInt($(".checkout").attr('id'));
-     $.ajax({
+    $.ajax({
 	        type:"POST",
 	        url: "/rooms/change_state",
 	        dataType:"json",
 	        data: {customer_id: customer_id},
 	        success:function(result){
-            $(".checkout").hide();
+            $("a[id="+customer_id+"]").hide();
 	          $("#state").text(result.aasm_state);
 	          $("#notice").append("Room status changed successfully")
 	        },
 	        error:function(jqXHR,exception){
-            $(".checkout").show();
+            $("a[id="+customer_id+"]").show();
             $("#notice").text("There was an error in changing state");
 	        }
 	      })
